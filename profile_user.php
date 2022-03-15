@@ -74,6 +74,7 @@ if (!$_SESSION['user']) {
                 <div class="profile-box__text">
                     <h3 class="profile-box__full_name">ФИО: <?= $_SESSION['user']['full_name'] ?></h3>
                     <p class="profile-box__email">Почта: <a class="profile-box__email" href="#"><?= $_SESSION['user']['email'] ?></a></p>
+                    <p class="profile-box__status">Статус: <span class="profile-box__span-status"><?= $_SESSION['user']['status'] ?></span></p>
                     <div class="profile-box__btns-container">
                         <?php
                         if (!empty($_SESSION['user']['status'] == 'admin')) {
@@ -109,9 +110,16 @@ if (!$_SESSION['user']) {
                                 </a>
                                 <p class="card-user__status">Статус: <?= $card_user['status'] ?></p>
                             </div>
-                            <div class="card-user__btn-activity">
-                                <a href="#" class="btn-activity__delete">Удалить пользователя</a>
-                            </div>
+                            <?php
+                            if (!empty($card_user['status'] == 'user')) {
+                            ?>
+                                <div class="card-user__btn-activity">
+                                    <a class="btn-activity__delete" href="vendor/deleteUsers.php?id=<?= $card_user['id'] ?>">Удалить пользователя</a>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                            
                         </div>
                     <?php
                         }
